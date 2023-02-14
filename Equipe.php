@@ -7,6 +7,7 @@ class Equipe
 	// déclaration table intermediaire
 	private String $_equipe;
     private Pays $_pays;
+    //lister toutes les équipes d'un joueur
     private array $_listJoueur;
 	public function __construct( $equipe,$pays)
 	{
@@ -72,4 +73,18 @@ class Equipe
             $this->_listJoueur [] = $joueur;
             return $this;
         }
+
+    public function getListJoueurEquipeAffichage(){
+        echo "<div class='box boxBlue'>  $this->_equipe";
+		echo "<div class='boxChild boxBlue'>";
+        if(!empty($this->_listJoueur) )
+            foreach($this->_listJoueur as $value ){
+                echo "<p>  $value	 </p>";
+            }
+        
+		echo "</div>";
+		echo "</div>";
+		
+
+    }
 }

@@ -49,7 +49,9 @@ class Pays
      * Get the value of _listFilm
      */ 
     public function getListEquipe()
-    {
+    {	
+		//affichage
+
         return $this->_listEquipe;
     }
 
@@ -72,7 +74,17 @@ class Pays
             return $this;
         }
 
-
+	public function getListEquipeAffichage()
+	{	
+		echo "<div class='box'>  $this->_Pays";
+		echo "<div class='boxChild'>";
+		foreach($this->_listEquipe as $value ){
+			echo "<p>  $value	 </p>";
+		}
+		echo "</div>";
+		echo "</div>";
+		
+	}
 
 
 }

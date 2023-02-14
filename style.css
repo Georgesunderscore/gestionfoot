@@ -1,0 +1,50 @@
+* {
+	padding: 10px;
+	margin: 10px;
+}
+
+p {
+	padding: 10px;
+	margin: 10px;
+
+}
+
+div {
+    
+	text-shadow: 1px 1px #ff0000;
+    text-align: left;
+}
+h2 {
+    text-align: left;
+}
+
+.box{
+    min-height: 290px;
+    min-width: 290px;
+    background-color: #e96262;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+
+.boxChild{
+    min-height: 250px;
+    min-width: 250px;
+    background-color: #ca7b7b;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+.boxBlue{
+    background-color: #6d9df5;
+}
+
+.container-flex-row {
+    display: flex;
+	flex-flow: row wrap;
+	margin: 10px;
+	text-align: center;
+    min-width: 290px;
+}
