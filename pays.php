@@ -6,7 +6,7 @@ class Pays
 {
 	// déclaration table intermediaire
 	private String $_Pays;
-
+	private array $_listEquipe;
 	
 
 	public function __construct($Pays)
@@ -21,7 +21,7 @@ class Pays
 	/**
 	 * Get the value of _nation
 	 */ 
-	public function get_Pays()
+	public function getPays():string
 	{
 		return $this->_Pays;
 	}
@@ -31,10 +31,48 @@ class Pays
 	 *
 	 * @return  self
 	 */ 
-	public function set_Pays($_Pays)
+	public function setPays($Pays)
 	{
-		$this->_Pays = $_Pays;
+		$this->_Pays = $Pays;
 
 		return $this;
 	}
+
+	public function __toString()
+	{
+		$ecrire = $this->getPays();
+		echo "<br>";
+		return $ecrire;
+	}
+
+        /**
+     * Get the value of _listFilm
+     */ 
+    public function getListEquipe()
+    {
+        return $this->_listEquipe;
+    }
+
+    /**
+     * Set the value of _listFilm
+     *
+     */ 
+    public function setListEquipe($_listEquipe)
+    {
+        $this->_listEquipe = $_listEquipe;
+
+        
+    }
+
+	
+    public function ajoutEquipe(Equipe $equipe)
+        {
+            //ajouter un element a la list des livres
+            $this->_listEquipe [] = $equipe;
+            return $this;
+        }
+
+
+
+
 }

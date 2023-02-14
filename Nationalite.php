@@ -21,7 +21,7 @@ class Nationalite
 	/**
 	 * Get the value of _nation
 	 */ 
-	public function get_nation()
+	public function getNation():string
 	{
 		return $this->_nation;
 	}
@@ -31,10 +31,18 @@ class Nationalite
 	 *
 	 * @return  self
 	 */ 
-	public function set_nation($_nation)
+	public function setNation($nation)
 	{
-		$this->_nation = $_nation;
+		$this->_nation = $nation;
 
 		return $this;
 	}
+
+	public function __toString()
+	{
+		$ecrire = $this->getNation();
+		echo "<br>";
+		return $ecrire;
+	}
+
 }
