@@ -7,15 +7,19 @@ class Equipe
 	// déclaration table intermediaire
 	private String $_equipe;
     private Pays $_pays;
-    //lister toutes les équipes d'un joueur
-    private array $_listJoueur;
-	public function __construct( $equipe,$pays)
+    private int $_year;
+
+    private array $_listSaison;
+    
+   
+	public function __construct( $equipe,$pays,$year)
 	{
 		$this->_equipe = $equipe;
         $this->_pays = $pays;
+        $this->_year = $year;
+        
         //ajouter 
         $this->_pays->ajoutEquipe($this);
-
 	}
 
 	/**
@@ -45,46 +49,65 @@ class Equipe
 		return $ecrire;
 	}
 
-
-
     /**
-     * Get the value of _listJoueur
+     * Get the value of _year
      */ 
-    public function getListJoueur()
+    public function getYear()
     {
-        return $this->_listJoueur;
+        return $this->_year;
     }
 
     /**
-     * Set the value of _listJoueur
+     * Set the value of _year
      *
      * @return  self
      */ 
-    public function setListJoueur($listJoueur)
+    public function setYear($year)
     {
-        $this->_listJoueur = $listJoueur;
-
+        $this->_year = $year;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the value of _listSaison
+     */ 
+    public function getListSaison()
+    {
+        return $this->_listSaison;
+    }
+    
+    /**
+     * Set the value of _listSaison
+     *
+     * @return  self
+     */ 
+    public function setListSaison($listSaison)
+    {
+        $this->_listSaison = $listSaison;
         return $this;
     }
 
-    public function ajoutJoueur(Joueur $joueur)
-        {
-            //ajouter un element a la list des livres
-            $this->_listJoueur [] = $joueur;
-            return $this;
-        }
+    public function ajoutSaison(Saison $saison)
+    {
+        //ajouter un element a la list des livres
+        $this->_listSaison [] = $saison;
+        return $this;
+    }
+
+    
 
     public function getListJoueurEquipeAffichage(){
         echo "<div class='box boxBlue'>  $this->_equipe";
-		echo "<div class='boxChild boxBlue'>";
-        if(!empty($this->_listJoueur) )
-            foreach($this->_listJoueur as $value ){
-                echo "<p>  $value	 </p>";
+        echo "$this->_pays ( $this->_year)";
+    	echo "<div class='boxChild boxBlue'>";
+        if(!empty($this->_listSaison) )
+            foreach($this->_listSaison as $saison ){
+                //il faut concatention pour utiliser la flech pour acceder fonction precise
+                echo "<p>".  $saison->getJoueur()->getPrenom()  . ' ' . $saison->getJoueur()->getNom() . ' ' . $saison->getYear() ."</p>";
+                
             }
-        
-		echo "</div>";
-		echo "</div>";
-		
-
+    	echo "</div>";
+    	echo "</div>";
     }
 }

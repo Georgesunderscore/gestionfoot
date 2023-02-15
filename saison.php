@@ -6,15 +6,24 @@
 class Saison
 {
 	// déclaration table intermediaire
+	private Equipe $_equipe;
 	private Joueur $_joueur;
+
     private DateTime $_dateDDS;
+	
 	/*
     @param dateDDS string
 	*/
-    public function __construct($joueur, string $dateDDS)
+    public function __construct( $joueur, $equipe, $dateDDS)
 	{
-        $this->_joueur = $joueur ;
+		$this->_joueur = $joueur ;
+		$this->_equipe = $equipe ;
         $this->_dateDDS = new dateTime($dateDDS) ;
+
+		
+		$this->_joueur->ajoutSaison($this);
+		$this->_equipe->ajoutSaison($this);
+
     }
 	/**
 	 * Get the value of _prenom
@@ -24,7 +33,7 @@ class Saison
 
 	public function __toString()
 	{
-		$ecrire = $this->getjoueur() . " " . $this->getDateDDS();
+		$ecrire = $this->getEquipe() . " " . $this->getDateDDS();
 		echo "<br>";
 		return $ecrire;
 	}
@@ -49,6 +58,32 @@ class Saison
         return $this;
     }
 
+	
+
+	/**
+	 * Get the value of _equipe
+	 */ 
+	public function getEquipe()
+	{
+		return $this->_equipe;
+	}
+
+	/**
+	 * Set the value of _equipe
+	 *
+	 * @return  self
+	 */ 
+	public function setEquipe($equipe)
+	{
+		$this->_equipe = $equipe;
+		return $this;
+	}
+
+	
+	
+	
+	
+
 	/**
 	 * Get the value of _joueur
 	 */ 
@@ -68,7 +103,15 @@ class Saison
 
 		return $this;
 	}
+
+	public function getYear(){
+		$year = date_format($this->getDateDDS(), 'Y'); 
+		return $year;
+	}
 }
+
+
+
 
 // test date date time zone 
 //  $d = new DateTimeImmutable("2022-06-02 15:44:48 UTC");

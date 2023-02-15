@@ -9,21 +9,21 @@ class Joueur
 	private String $_prenom;
     private String $_nom;
 	private String $_paysOrigin;
-	private String $_nationalite;
+	private Nationalite $_nationalite;
     private DateTime $_dateDN;
-	private Equipe $_equipe;
-
-	private array $_listEquipe;
 	
-	public function __construct($prenom, $nom, $dateDN, $equipe)
+	private array $_listSaison;
+
+	
+	public function __construct($prenom, $nom, $dateDN,$nationalite)
 	{
-        $this->_prenom = $prenom ;
-        $this->_nom    = $nom ;
+		$this->_prenom = $prenom ;
+        $this->_nom    = is_null($nom) ?  '' : $nom ; 
         $this->_dateDN = new dateTime($dateDN) ;
-		$this->_equipe = $equipe;
+		$this->_nationalite = $nationalite ;
+		
 		//ajoute a list des joueurs 
-		$this->_equipe->ajoutJoueur($this);
-		$this->ajoutEquipe();
+		
     }
 	/**
 	 * Get the value of _prenom
@@ -49,7 +49,8 @@ class Joueur
 	 */ 
 	public function getNom():string
 	{
-		return $this->_nom;
+		return $this->_nom; 
+		
 	}
 
 	/**
@@ -85,50 +86,16 @@ class Joueur
 	public function __toString()
 	{
 		///diff pour trouve age 
-		$year = date_format($this->getDateDN(), 'Y'); 
 		
-		$ecrire = $this->getNom() . " " . $this->getPrenom() . " " . $year; 
 		
+		$ecrire = $this->getNom() . " " . $this->getPrenom() . " " . $this->getYear(); 
 		echo "<br>";
-
 		return $ecrire;
 	}
 
-	// // Your date of birth
-	// $bday = $this->getDateDN(); 
-	// $today = new Datetime(date('m.d.y'));
-			
-	// $diff = $bday->diff($today);	
-	// $age=$diff->y;
 	
-	/**
-	 * Get the value of list_equipe
-	 */ 
-	public function getListEquipe()
-	{
-		return $this->_listEquipe;
-	}
-
-	/**
-	 * Set the value of list_equipe
-	 *
-	 * @return  self
-	 */ 
-	public function setListEquipe($listEquipe)
-	{
-		$this->_listEquipe = $listEquipe;
-
-		return $this;
-	}
-
 	
-	public function ajoutEquipe()
-        {
-            //ajouter un element a la list des livres
-			$this->_listEquipe [] = $this->_equipe;
-            return $this;
-        }
-
+	
 	/**
 	 * Get the value of _paysOrigin
 	 */ 
@@ -136,7 +103,7 @@ class Joueur
 	{
 		return $this->_paysOrigin;
 	}
-
+	
 	/**
 	 * Set the value of _paysOrigin
 	 *
@@ -146,6 +113,55 @@ class Joueur
 	{
 		$this->_paysOrigin = $paysOrigin;
 		return $this;
+	}
+	
+	
+	
+	/**
+	 * Get the value of _listSaison
+	 */ 
+	public function getListSaison()
+	{
+		return $this->_listSaison;
+	}
+	
+	/**
+	 * Set the value of _listSaison
+	 *
+	 * @return  self
+	 */ 
+	public function setListSaison($_listSaison)
+	{
+		$this->_listSaison = $_listSaison;
+		
+		return $this;
+	}
+	
+	
+    public function ajoutSaison(Saison $saison)
+	{
+		//ajouter un element a la list des livres
+		$this->_listSaison [] = $saison;
+		return $this;
+	}
+	
+	public function getYear(){
+		$year = date_format($this->getDateDN(), 'Y'); 
+		return $year;
+	}
+	
+	
+	public function getListEquipeJoueurAffichage(){
+		echo "<div class='box boxBlue'>  $this";
+		//echo   $this->_nationalite . '(' . $this->getYear() . ')' ;
+		echo "<div class='boxChild boxBlue'>";
+		if(!empty($this->_listSaison) )
+		foreach($this->_listSaison as $saison ){
+			//il faut concatention pour utiliser la flech pour acceder fonction precise
+			echo "<p>".  $saison->getEquipe() . ' ' . $saison->getEquipe()->getYear() ."</p>";
+		}
+		echo "</div>";
+		echo "</div>";
 	}
 
 	/**
@@ -164,19 +180,7 @@ class Joueur
 	public function setNationalite($nationalite)
 	{
 		$this->_nationalite = $nationalite;
+
 		return $this;
 	}
 }
-
-// test date date time zone 
-//  $d = new DateTimeImmutable("2022-06-02 15:44:48 UTC");
-//  $timezones = [ 'Europe/London', 'GMT+04:45', '-06:00', 'CEST' ];		
-//  //pour afficher la date par rapport au time zone
-//  function getTimezone( $timezones,$d){
-//  	foreach ($timezones as $tz) {
-//  		$tzo = new DateTimeZone($tz);
-// 		//local nouveaux objet retourné
-//  		$local = $d->setTimezone($tzo);
-//  		echo $local->format(DateTimeInterface::RFC2822 . ' — e'), "\n";
-//  	 }
-//   }	 

@@ -1,0 +1,19 @@
+// // Your date of birth
+	// $bday = $this->getDateDN(); 
+	// $today = new Datetime(date('m.d.y'));
+			
+	// $diff = $bday->diff($today);	
+	// $age=$diff->y;
+	
+// test date date time zone 
+//  $d = new DateTimeImmutable("2022-06-02 15:44:48 UTC");
+//  $timezones = [ 'Europe/London', 'GMT+04:45', '-06:00', 'CEST' ];		
+//  //pour afficher la date par rapport au time zone
+//  function getTimezone( $timezones,$d){
+//  	foreach ($timezones as $tz) {
+//  		$tzo = new DateTimeZone($tz);
+// 		//local nouveaux objet retourné
+//  		$local = $d->setTimezone($tzo);
+//  		echo $local->format(DateTimeInterface::RFC2822 . ' — e'), "\n";
+//  	 }
+//   }	
